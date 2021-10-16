@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color: #fbebdb">
+<nav th:replace="fragments/fragment :: navbar('Boba Tea')"></nav>
+
+<div class="container">
+    <br><br><br>
+    <div class="justify-content-center">
+        <div class="col d-flex justify-content-center">
+            <div class="card card-block align-items-center d-flex" style="width: 50rem">
+                <div class="card-body">
+                    <br>
+                    <h2 class="font-weight-bold align-items-center text-center" style="color: #64443c"
+                        th:text="'Boba Tea ' +${name} + ' successfully added!'">
+                    </h2>
+
+                    <br>
+                    <br>
+                    <a class="text-center" href="/boba" style="color: #f3ae76" th:text="'<-- Back to Boba Tea list'"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

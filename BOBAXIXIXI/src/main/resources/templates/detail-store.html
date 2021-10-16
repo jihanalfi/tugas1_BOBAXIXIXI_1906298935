@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color: #fbebdb">
+<nav th:replace="fragments/fragment :: navbar('Store')"></nav>
+<div class="container">
+    <br><br><br>
+    <div class="justify-content-center">
+        <div class="col d-flex justify-content-center">
+            <div class="card card-block align-items-center d-flex" style="width: 50rem">
+                <div class="card-body">
+                    <br>
+                    <h3 class="font-weight-bold align-items-center text-center" style="color: #64443c" >
+                        Store Detail
+                    </h3>
+                    <br>
+                    <table class="table table-borderless" style="width:40rem">
+                        <tr>
+                            <td style="width: 17.5%"><h6>Store Name</h6></td>
+                            <td th:text="${store.name}" style="width: 37.5%"></td>
+                            <td style="width: 17.5%"><h6>Store Code</h6></td>
+                            <td th:text="${store.storeCode}" style="width: 37.5%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><h6>Address</h6></td>
+                            <td th:text="${store.address}" colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td><h6>Open Hour</h6></td>
+                            <td th:text="${store.openHour}" colspan="4"></td>
+
+                        </tr>
+                        <tr>
+                            <td><h6>Close Hour</h6></td>
+                            <td th:text="${store.closeHour}" colspan="4"></td>
+
+                        </tr>
+                        <tr>
+                            <td><h6>Manager</h6></td>
+                            <td th:text="${store.manager.fullName}" colspan="4"></td>
+
+                        </tr>
+                    </table>
+                    <br>
+                    <h4 class="font-weight-bold align-items-center text-center" style="color: #64443c" >
+                        List Of Boba Tea
+                    </h4>
+                    <table class="table table-striped text-center">
+                        <thead class="text-light text-center" style="background-color: #64443c">
+                        <tr>
+                            <td>No</td>
+                            <td>Name</td>
+                            <td>Topping</td>
+                            <td>Price</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="bts, iStatus : ${store.listBobaTeaStore}">
+                            <td th:text="${iStatus.count}" th:style="'font-weight:bold;'"></td>
+                            <td th:text="${bts.bobaTea.name}"></td>
+                            <td th:text="${bts.bobaTea.topping.name}"></td>
+                            <td th:text="${bts.bobaTea.price}"></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <a class="btn text-light text-center" style="background-color: orange"
+                        th:href="@{/store/} + ${store.idStore} +'/assign-boba'">
+                        + Add Boba to Store</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

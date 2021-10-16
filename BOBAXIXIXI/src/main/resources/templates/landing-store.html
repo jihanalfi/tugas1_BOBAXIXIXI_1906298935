@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Store BobaXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color: #fbebdb">
+<nav th:replace="fragments/fragment :: navbar('Store')"></nav>
+
+<div class="container" >
+    <br><br><br>
+    <div class="justify-content-center">
+        <div class="col d-flex">
+            <div class="card card-block d-flex" style="width: 70rem">
+                <br>
+                <h2 class="font-weight-bold align-items-center text-center" style="color: #64443c" >
+                    List of Store
+                </h2>
+                <a th:href="@{store/add/}" class="btn text-light" style="background-color: orange; width: 9rem; alignment: left">
+                    + Add store</a>
+                <div class="card-body align-items-center d-flex justify-content-center">
+                    <br><br>
+                    <table class="table text-center table-striped">
+                        <thead style="background-color: #64443c">
+                            <tr class="text-light">
+                                <th>No</th>
+                                <th>Store Code</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Operational Hour</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="store, iStatus : ${listStore}">
+                                <td th:text="${iStatus.count}" th:style="'font-weight:bold;'"></td>
+                                <td th:text="${store.storeCode}"></td>
+                                <td th:text="${store.name}"></td>
+                                <td th:text="${store.address}"></td>
+                                <td th:text="${store.openHour} + ' - ' + ${store.closeHour}"></td>
+                                <td>
+                                    <a class="btn btn-primary" th:href="@{store/} + ${store.idStore}">View</a>
+                                    <a class="btn btn-warning text-light" th:href="@{store/update/} + ${store.idStore}" >Update</a>
+                                    <a class="btn btn-danger" th:href="@{store/delete/} + ${store.idStore}">Delete</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

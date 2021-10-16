@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color: #fbebdb">
+<nav th:replace="fragments/fragment :: navbar('Boba Tea')"></nav>
+
+<div class="container">
+    <br><br><br>
+    <div class="justify-content-center">
+        <div class="col d-flex justify-content-center">
+            <div class="card card-block align-items-center d-flex" style="width: 55rem">
+                <div class="card-body">
+                    <br>
+                    <h2 class="font-weight-bold align-items-center text-center" style="color: #64443c"
+                        th:text="'Stores successfully updated for Boba Tea ' + ${bobaTea.name} + '!'">
+                    </h2>
+
+                    <br>
+                    <br>
+                    <a class="text-center" th:href="@{/boba}" style="color: #f3ae76" th:text="'<-- Back to list of Boba Tea'"></a>
+
+                    <br><br>
+                    <h3 class="text-center"  style="color: #64443c">List of Store</h3>
+                    <br>
+                    <table class="table table-striped text-center" style="width:50rem">
+                        <thead class="text-light text-center" style="background-color: #64443c">
+                        <tr>
+                            <td>Store Code</td>
+                            <td>Name</td>
+                            <td>Address</td>
+                            <td>Operational Hour</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="bobaTeaStore : ${listBobaTeaStore} ">
+                            <td th:text="${bobaTeaStore.store.storeCode}"></td>
+                            <td th:text="${bobaTeaStore.store.name}"></td>
+                            <td th:text="${bobaTeaStore.store.address}"></td>
+                            <td th:text="${bobaTeaStore.store.openHour} + ' - ' + ${bobaTeaStore.store.closeHour}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

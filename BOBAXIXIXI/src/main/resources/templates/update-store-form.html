@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color: #fbebdb">
+<nav th:replace="fragments/fragment :: navbar('Store')"></nav>
+<div class="container">
+    <br><br><br>
+    <div class="justify-content-center">
+        <div class="col d-flex justify-content-center">
+            <div class="card card-block align-items-center d-flex" style="width: 50rem">
+                <div class="card-body">
+                    <br>
+                    <h3 class="font-weight-bold align-items-center text-center" style="color: #64443c" >
+                        Update Store Form
+                    </h3>
+                    <br>
+                    <form th:action="@{/store/update/} + ${store.idStore}" th:object="${store}" method="post">
+                        <input type="hidden" th:field="*{idStore}">
+                        <table class="table table-borderless" style="width:40rem">
+                            <tr>
+                                <td>
+                                    Store Name <br>
+                                    <input required class="form-control" type="text" name="name" th:value="*{name}">
+                                </td>
+                                <td>
+                                    Manager <br>
+                                    <select class="form-control" id="selectMenu"
+                                            th:field = "*{manager}" >
+                                        <option th:each ="manager: ${listManager}"
+                                                th:text = "${manager.fullName}"
+                                                th:value = "${manager.idManager}">
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    Address <br>
+                                    <input required class="form-control" type="textarea" name="address" th:value="*{address}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Open Hour <br>
+                                    <input required class="form-control" type="time" name="openHour" th:value="*{openHour}"/>
+                                </td>
+                                <td>
+                                    Close Hour <br>
+                                    <input required class="form-control" type="time" name="closeHour" th:value="*{closeHour}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" >
+                                    <a class="btn btn-light" href="/">Cancel</a>
+                                    <button class="btn text-light" type="submit" style="background-color: #64443c">Save</button>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

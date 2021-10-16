@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body style="background-color: #fbebdb">
+<nav th:replace="fragments/fragment :: navbar('Search')"></nav>
+<div class="container">
+    <br><br><br>
+    <div class="justify-content-center">
+        <div class="col d-flex justify-content-center">
+            <div class="card card-block align-items-center d-flex" style="width: 55rem">
+                <div class="card-body">
+                    <br>
+                    <h2 class="font-weight-bold align-items-center text-center" style="color: #64443c">
+                        Find Available Boba Variant By Topping
+                    </h2>
+                    <br>
+                    <br>
+                    <form th:action="@{/search(bobaName=${bobaName},toppingName=${toppingName})}" method="GET">
+                        <table class="table table-borderless" style="width: 40rem">
+                            <tr>
+                                <td style="width: 40%">
+                                    <h5 style="color: #64443c">Boba Name</h5>
+                                </td>
+                                <td style="width: 40%">
+                                    <h5 style="color: #64443c">Topping Name</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="form-control" name="bobaName">
+                                        <option th:each="boba : ${listBobaTea}" th:text="${boba.name}" th:value="${boba.name}" th:if="${namaBoba == boba.name}" selected></option>
+                                        <option th:each="boba : ${listBobaTea}" th:text="${boba.name}" th:value="${boba.name}" th:if="${namaBoba != boba.name}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="topping">
+                                        <!--<option th:each="topping : ${listTopping}" th:text="${topping.name}" th:value="${topping.name}"></option>-->
+                                        <option th:each="topping : ${listTopping}" th:text="${topping.name}" th:value="${topping.name}" th:if="${namaTopping == topping.name}" selected></option>
+                                        <option th:each="topping : ${listTopping}" th:text="${topping.name}" th:value="${topping.name}" th:if="${namaTopping != topping.name}"></option>
+                                    </select>
+                                </td>
+                                <td style="width: 20%">
+                                    <button class="btn text-light" style="background-color: #64443c" type="submit">Search</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+
+                    <table class="table table-striped text-center" style="width: 50rem">
+                        <thead class="text-light text-center" style="background-color: #64443c">
+                        <tr>
+                            <td>No</td>
+                            <td>Price</td>
+                            <td>Size</td>
+                            <td>Ice</td>
+                            <td>Sugar</td>
+                            <td>Store Name</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="bts, iStatus : ${listBobaTeaStore}">
+                            <td th:text="${iStatus.count}" th:style="'font-weight:bold;'"></td>
+                            <td th:text="${bts.bobaTea.price}"></td>
+
+                            <td th:if="${bts.bobaTea.size==0}">S</td>
+                            <td th:if="${bts.bobaTea.size==1}">M</td>
+                            <td th:if="${bts.bobaTea.size==2}">L</td>
+
+                            <td th:if="${bts.bobaTea.iceLevel==0}">Less</td>
+                            <td th:if="${bts.bobaTea.iceLevel==1}">Normal</td>
+                            <td th:if="${bts.bobaTea.iceLevel==2}">Extra</td>
+
+                            <td th:if="${bts.bobaTea.sugarLevel==0}">Less</td>
+                            <td th:if="${bts.bobaTea.sugarLevel==1}">Normal</td>
+                            <td th:if="${bts.bobaTea.sugarLevel==2}">Extra</td>
+
+                            <td th:text="${bts.store.name}"></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
